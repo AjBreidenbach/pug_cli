@@ -57,6 +57,7 @@ pub struct PugOptions {
     client: bool,
     stdin: bool,
     pretty: bool,
+    doctype: Option<String>,
 }
 
 impl PugOptions {
@@ -112,6 +113,11 @@ impl PugOptions {
         self.pretty = true;
         self
     }
+
+    pub fn doctype(mut self, dt: String) -> Self {
+        self.doctype = Some(dt);
+        self
+    }
 }
 
 impl IntoIterator for PugOptions {
@@ -150,6 +156,11 @@ impl IntoIterator for PugOptions {
         }
         if self.client {
             result.push("--client".into())
+        }
+
+        if let Some(doctype) = self.doctype {
+            result.push("--doctype".into());
+            result.push(doctype);
         }
 
         result.into_iter()
