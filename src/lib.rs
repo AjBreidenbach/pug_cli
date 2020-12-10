@@ -71,6 +71,7 @@ impl PugOptions {
             client: false,
             stdin: false,
             pretty: false,
+            doctype: None,
         }
     }
 
